@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日替わりコンテンツ</title>
+  <style>
+    /* 全体のスタイル */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* コンテンツボックスのスタイル */
+    #dailyContent {
+      background-color: #fff;
+      border: 2px solid #00aaff;
+      border-radius: 10px;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 1.5em;
+      line-height: 1.6;
+      text-align: center; /* テキストを中央揃えに */
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards; /* アニメーション */
+      margin-top: 20px; /* タイトルとの間隔 */
+    }
+
+    /* タイトルのスタイル */
+    h1 {
+      color: #00aaff;
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 20px; /* タイトル下にスペースを追加 */
+    }
+
+    /* 名言のスタイル */
+    .quote-title {
+      font-weight: bold;
+      margin-bottom: 10px; /* 名言タイトルの下にスペース */
+    }
+
+    .quote-content {
+      font-style: italic;
+    }
+
+    /* フェードインとスライドアップのアニメーション */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* モバイルフレンドリーなデザイン */
+    @media (max-width: 600px) {
+      #dailyContent {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>今日の日替わりコンテンツ</h1>
+  <div id="dailyContent">
+    <div class="quote-title"></div>
+    <div class="quote-content"></div>
+  </div>
+
+  <script>
+    // 日替わりのコンテンツを配列に用意
+    const contents = [
+      { title: "今日の豆知識", content: "パソコンのF7キーはカタカナに変換します。" },
+      { title: "今日の名言", content: "『最も成功する人は、常に学び続ける人である』" },
+      { title: "おみくじ", content: "大吉！今日は素晴らしい日です。" },
+      { title: "今日の紅茶", content: "カモミールティー - リラックス効果があります。" }
+    ];
+
+    // 今日の日付を取得
+    const date = new Date();
+    const todaysContent = contents[date.getDate() % contents.length];
+
+    // タイトルとコンテンツをそれぞれの要素に表示
+    document.querySelector(".quote-title").innerText = todaysContent.title;
+    document.querySelector(".quote-content").innerText = todaysContent.content;
+  </script>
+
+</body>
+</html>
 
