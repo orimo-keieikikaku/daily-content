@@ -131,9 +131,9 @@
       { title: "今日のことわざ", content: "「ゆっくりと急げ」フィンランド" }
     ];
 
-    // 今日の日付を取得
-    const date = new Date();
-    const todaysContent = contents[date.getDate() % contents.length];
+    // ランダムなインデックスを生成してコンテンツを選択
+    const randomIndex = Math.floor(Math.random() * contents.length);
+    const todaysContent = contents[randomIndex];
 
     // タイトルとコンテンツをそれぞれの要素に表示
     document.querySelector(".quote-title").innerText = todaysContent.title;
