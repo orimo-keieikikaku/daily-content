@@ -131,9 +131,10 @@
       { title: "今日のことわざ", content: "「ゆっくりと急げ」フィンランド" }
     ];
 
-    // ランダムなインデックスを生成してコンテンツを選択
-    const randomIndex = Math.floor(Math.random() * contents.length);
-    let todaysContent = contents[randomIndex];
+    // 今日の日付に基づいてインデックスを決定し、1日1種類のコンテンツを表示
+    const date = new Date();
+    const index = date.getDate() % contents.length;
+    let todaysContent = contents[index];
 
     // 『』の後で改行処理
     if (todaysContent.content.includes("』")) {
