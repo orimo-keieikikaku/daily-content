@@ -24,8 +24,8 @@
       border: 2px solid #00aaff;
       border-radius: 10px;
       padding: 20px;
-      width: 80%;
-      max-width: 600px;
+      width: 90%; /* 横幅を大きく調整 */
+      max-width: 800px; /* 横幅の最大サイズ */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       font-size: 1.5em;
       line-height: 1.6;
@@ -123,7 +123,7 @@
       { title: "今日の豆知識", content: "タイの新年を祝うお祭りで、4月に行われる「ソンクラン」では水を掛け合って清め、幸運を祈ります。国中が水浸しになり、暑い時期の一大イベントです。" },
       { title: "今日の豆知識", content: "メキシコでは毎年11月に亡くなった家族や友人を偲ぶ「死者の日」が開催されます。カラフルな装飾を施し、陽気に過去の思い出を祝いながら故人を迎えます。" },
       { title: "今日の豆知識", content: "イギリスの「アフターヌーンティー」は19世紀からの伝統で、午後に紅茶とスコーン、サンドイッチを楽しむ習慣です。紅茶のミルクを先に注ぐか後に注ぐかが話題になることがあり、伝統を重んじる人々はミルクを先に注ぐ派らしいです。" },
-      { title: "今日の豆知識", content: "オーストラリアには「バーベキュー文化」があり、家族や友人と屋外でバーベキューを楽しむのが一般的です。ビーチや公園に公共のバーベキュー施設が設置され、リラックスしたライフスタイルの象徴です。" }, 
+      { title: "今日の豆知識", content: "オーストラリアには「バーベキュー文化」があり、家族や友人と屋外でバーベキューを楽しむのが一般的です。ビーチや公園に公共のバーベキュー施設が設置され、リラックスしたライフスタイルの象徴です。" },
       { title: "今日のことわざ", content: "「一度始めたら半分終わったも同然」イタリア" },
       { title: "今日のことわざ", content: "「雲の向こうはいつも青空」インド" },
       { title: "今日のことわざ", content: "「強い風は、強い木を育てる」ギリシャ" },
@@ -133,11 +133,22 @@
 
     // ランダムなインデックスを生成してコンテンツを選択
     const randomIndex = Math.floor(Math.random() * contents.length);
-    const todaysContent = contents[randomIndex];
+    let todaysContent = contents[randomIndex];
+
+    // 『』の後で改行処理
+    if (todaysContent.content.includes("』")) {
+      const parts = todaysContent.content.split("』");
+      todaysContent.content = `${parts[0]}』<br>${parts[1]}`;
+    }
+
+    // /で区切られた部分を()で囲む
+    if (todaysContent.content.includes("/")) {
+      todaysContent.content = todaysContent.content.replace("/", "（") + "）";
+    }
 
     // タイトルとコンテンツをそれぞれの要素に表示
-    document.querySelector(".quote-title").innerText = todaysContent.title;
-    document.querySelector(".quote-content").innerText = todaysContent.content;
+    document.querySelector(".quote-title").innerHTML = todaysContent.title;
+    document.querySelector(".quote-content").innerHTML = todaysContent.content;
   </script>
 
 </body>
